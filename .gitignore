@@ -14,3 +14,7 @@
 serving_dir
 .ipynb_checkpoints/
 !week_6_stream_processing/avro_example/data/rides.csv
+
+my-work/01-docker-terraform/ssh/
+
+my-work/01-docker-terraform/terraform/manifest-altar-412117-4282c76093d7.json
