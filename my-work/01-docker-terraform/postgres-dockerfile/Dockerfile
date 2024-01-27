@@ -1,0 +1,34 @@
+
+docker create network pg-network
+
+```
+docker run -it \
+    -e POSTGRES_USER=root \
+    -e POSTGRES_PASSWORD=root \
+    -e POSTGRES_DB=ny_taxi \
+    -v $(pwd)/ny_taxi_postgres_data:/var/lib/postgresql/data \
+    -p 5433:5432 \
+    --network=pg-network \
+    --name=pg-database \
+    postgres:13
+
+
+docker run -it \
+    -e PGADMIN_DEFAULT_EMAIL="admin@admin.com" \
+    -e PGADMIN_DEFAULT_PASSWORD="root" \
+    -p 5050:80 \
+    --network=pg-network \
+    --name=pg-admin \
+    dpage/pgadmin4
+```
+
+docker run -it \
+  --network=pg-network \
+test_ingest:v1 \
+ --user=root \
+ --password=root \
+ --host=pg-database  \
+ --port=5432 \
+ --db=ny_taxi \
+ --table_name=green_taxi_data_3 \
+ --url=$URL
